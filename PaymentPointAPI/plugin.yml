@@ -1,0 +1,10 @@
+---
+name: PaymentPointAPI
+main: blugin\api\paymentpool\PaymentPointAPI
+version: 1.0.0
+api: [3.0.0]
+authors: ['Blugin-team', 'PresentKim']
+description: '[PaymentPool] Provider for PointAPI'
+depend: ['EconomyAPI', 'PointAPI']
+load: STARTUP
+...
