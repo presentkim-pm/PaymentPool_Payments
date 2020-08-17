@@ -1,0 +1,10 @@
+---
+name: PaymentCoin
+main: blugin\api\paymentpool\PaymentCoin
+version: 1.0.0
+api: [3.0.0]
+authors: ['Blugin-team', 'PresentKim']
+description: '[PaymentPool] Provider for ojy Coin'
+depend: ['PaymentPool', 'Coin']
+load: STARTUP
+...
