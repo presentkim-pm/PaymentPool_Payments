@@ -1,0 +1,10 @@
+---
+name: PaymentSCash
+main: blugin\api\paymentpool\PaymentSCash
+version: 1.0.0
+api: [3.0.0]
+authors: ['Blugin-team', 'PresentKim']
+description: '[PaymentPool] Provider for SCash'
+depend: ['EconomyAPI', 'SCash']
+load: STARTUP
+...
