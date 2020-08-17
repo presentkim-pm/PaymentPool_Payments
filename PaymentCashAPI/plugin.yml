@@ -1,0 +1,10 @@
+---
+name: PaymentCashAPI
+main: blugin\api\paymentpool\PaymentCashAPI
+version: 1.0.0
+api: [3.0.0]
+authors: ['Blugin-team', 'PresentKim']
+description: '[PaymentPool] Provider for Zaoui267 CashAPI'
+depend: ['PaymentPool', 'CashAPI']
+load: STARTUP
+...
