@@ -31,6 +31,6 @@ use pocketmine\plugin\PluginBase;
 
 class PaymentCoin extends PluginBase{
     public function onLoad(){
-        PaymentPool::registerProvider(new CoinProvider(), ["ojy:coin"]);
+        PaymentPool::register(new CoinProvider(), ["ojy:coin"]);
     }
 }

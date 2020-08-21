@@ -31,6 +31,6 @@ use pocketmine\plugin\PluginBase;
 
 class PaymentCashAPI extends PluginBase{
     public function onLoad(){
-        PaymentPool::registerProvider(new CashAPIProvider(), ["zaoui267:cashapi", "zcash"]);
+        PaymentPool::register(new CashAPIProvider(), ["zaoui267:cashapi", "zcash"]);
     }
 }

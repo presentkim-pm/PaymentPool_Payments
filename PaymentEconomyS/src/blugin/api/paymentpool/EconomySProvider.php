@@ -56,6 +56,20 @@ class EconomySProvider implements IPaymentProvider{
 
     /**
      * @param Player|string $player
+     * @param float         $value init value
+     *
+     * @return bool If player's data was created
+     */
+    public function create($player, float $value) : bool{
+        if($this->exists($player))
+            return false;
+
+        EconomyAPI::getInstance()->createAccount($player, null, $value);
+        return true;
+    }
+
+    /**
+     * @param Player|string $player
      *
      * @return float|null If player's data was exists return null, else return player's money
      */
@@ -69,31 +83,31 @@ class EconomySProvider implements IPaymentProvider{
 
     /**
      * @param Player|string $player
-     * @param float         $money
+     * @param float         $value
      */
-    public function set($player, float $money) : void{
-        EconomyAPI::getInstance()->setMoney($player, $money);
+    public function set($player, float $value) : void{
+        EconomyAPI::getInstance()->setMoney($player, $value);
     }
 
     /**
      * @param Player|string $player
-     * @param float         $money
+     * @param float         $value
      *
      * @return float|null If player's data was exists return null, else return result money
      */
-    public function increase($player, float $money) : ?float{
-        EconomyAPI::getInstance()->addMoney($player, $money);
+    public function increase($player, float $value) : ?float{
+        EconomyAPI::getInstance()->addMoney($player, $value);
         return $this->get($player);
     }
 
     /**
      * @param Player|string $player
-     * @param float         $money
+     * @param float         $value
      *
      * @return float|null If player's data was exists return null, else return result money
      */
-    public function decrease($player, float $money) : ?float{
-        EconomyAPI::getInstance()->reduceMoney($player, $money);
+    public function decrease($player, float $value) : ?float{
+        EconomyAPI::getInstance()->reduceMoney($player, $value);
         return $this->get($player);
     }
 }

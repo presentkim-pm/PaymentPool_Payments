@@ -31,6 +31,6 @@ use pocketmine\plugin\PluginBase;
 
 class PaymentPointAPI extends PluginBase{
     public function onLoad(){
-        PaymentPool::registerProvider(new PointAPIProvider(), ["leader:pointapi", "point"]);
+        PaymentPool::register(new PointAPIProvider(), ["leader:pointapi", "point"]);
     }
 }

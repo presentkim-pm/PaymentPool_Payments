@@ -31,6 +31,6 @@ use pocketmine\plugin\PluginBase;
 
 class PaymentSCash extends PluginBase{
     public function onLoad(){
-        PaymentPool::registerProvider(new SCashProvider(), ["xxx:scach"]);
+        PaymentPool::register(new SCashProvider(), ["xxx:scach"]);
     }
 }

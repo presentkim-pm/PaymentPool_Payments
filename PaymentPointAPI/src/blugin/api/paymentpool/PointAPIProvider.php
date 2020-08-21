@@ -42,7 +42,9 @@ class PointAPIProvider implements IPaymentProvider{
      * @return float[] player name => money
      */
     public function getAll() : array{
-        return PointAPI::getInstance()->Pt;
+        return array_map(function(array $data) : float{
+            return (float) $data["Point"];
+        }, PointAPI::getInstance()->Pt);
     }
 
     /**
@@ -61,6 +63,25 @@ class PointAPIProvider implements IPaymentProvider{
 
     /**
      * @param Player|string $player
+     * @param float         $value init value
+     *
+     * @return bool If player's data was created
+     */
+    public function create($player, float $value) : bool{
+        if($this->exists($player))
+            return false;
+
+        if($player instanceof Player){
+            $player = $player->getName();
+        }
+        $player = strtolower($player);
+
+        PointAPI::getInstance()->Pt[$player]["Point"] = (int) $value;
+        return true;
+    }
+
+    /**
+     * @param Player|string $player
      *
      * @return float|null If player's data was exists return null, else return player's money
      */
@@ -72,14 +93,14 @@ class PointAPIProvider implements IPaymentProvider{
         }
         $player = strtolower($player);
 
-        return (float) PointAPI::getInstance()->Pt[$player]["포인트"];
+        return (float) PointAPI::getInstance()->Pt[$player]["Point"];
     }
 
     /**
      * @param Player|string $player
-     * @param float         $money
+     * @param float         $value
      */
-    public function set($player, float $money) : void{
+    public function set($player, float $value) : void{
         if(!$this->exists($player))
             return;
         if($player instanceof Player){
@@ -87,16 +108,16 @@ class PointAPIProvider implements IPaymentProvider{
         }
         $player = strtolower($player);
 
-        PointAPI::getInstance()->Pt[$player]["포인트"] = (int) $money;
+        PointAPI::getInstance()->Pt[$player]["Point"] = (int) $value;
     }
 
     /**
      * @param Player|string $player
-     * @param float         $money
+     * @param float         $value
      *
      * @return float|null If player's data was exists return null, else return result money
      */
-    public function increase($player, float $money) : ?float{
+    public function increase($player, float $value) : ?float{
         if(!$this->exists($player))
             return null;
         if($player instanceof Player){
@@ -104,17 +125,17 @@ class PointAPIProvider implements IPaymentProvider{
         }
         $player = strtolower($player);
 
-        PointAPI::getInstance()->Pt[$player]["포인트"] += (int) $money;
+        PointAPI::getInstance()->Pt[$player]["Point"] += (int) $value;
         return $this->get($player);
     }
 
     /**
      * @param Player|string $player
-     * @param float         $money
+     * @param float         $value
      *
      * @return float|null If player's data was exists return null, else return result money
      */
-    public function decrease($player, float $money) : ?float{
+    public function decrease($player, float $value) : ?float{
         if(!$this->exists($player))
             return null;
         if($player instanceof Player){
@@ -122,7 +143,7 @@ class PointAPIProvider implements IPaymentProvider{
         }
         $player = strtolower($player);
 
-        PointAPI::getInstance()->Pt[$player]["포인트"] -= (int) $money;
+        PointAPI::getInstance()->Pt[$player]["Point"] -= (int) $value;
         return $this->get($player);
     }
 }

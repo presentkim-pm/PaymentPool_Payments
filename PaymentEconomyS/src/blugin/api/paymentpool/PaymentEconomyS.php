@@ -31,6 +31,6 @@ use pocketmine\plugin\PluginBase;
 
 class PaymentEconomyS extends PluginBase{
     public function onLoad(){
-        PaymentPool::registerProvider(new EconomySProvider(), ["onebone:economyapi", "economys"]);
+        PaymentPool::register(new EconomySProvider(), ["onebone:economyapi", "economys"]);
     }
 }
