@@ -5,6 +5,6 @@ version: 1.0.0
 api: [3.0.0]
 authors: ['Blugin-team', 'PresentKim']
 description: '[PaymentPool] Provider for onebone EconomyS'
-depend: ['EconomyAPI', 'PaymentPool']
+depend: ['PaymentPool', 'EconomyAPI']
 load: STARTUP
 ...
