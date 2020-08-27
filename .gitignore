@@ -4,3 +4,4 @@
 !.gitignore
 !*Provider*.php
 !list.json
+!icon.png
