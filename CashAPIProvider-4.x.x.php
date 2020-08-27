@@ -18,10 +18,10 @@
  * @link    https://github.com/Blugin
  * @license https://www.gnu.org/licenses/lgpl-3.0 LGPL-3.0 License
  *
- * @name PaymentCacheAPIProvider
+ * @name PaymentCashAPIProvider
  * @api 4.0.0
  * @version 1.0.0
- * @main blugin\api\paymentpool\PaymentCacheAPIProvider
+ * @main blugin\api\paymentpool\PaymentCashAPIProvider
  * @depend PaymentPool
  */
 
@@ -31,7 +31,7 @@ use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 use z\CashAPI;
 
-class PaymentCacheAPIProvider extends PluginBase{
+class PaymentCashAPIProvider extends PluginBase{
     public function onLoad(){
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             /** @var \ReflectionProperty */
