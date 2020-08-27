@@ -18,10 +18,10 @@
  * @link    https://github.com/Blugin
  * @license https://www.gnu.org/licenses/lgpl-3.0 LGPL-3.0 License
  *
- * @name PaymentProvider-EconomyAPI
+ * @name PaymentEconomyAPIProvider
  * @api 3.0.0
  * @version 1.0.0
- * @main blugin\api\paymentpool\EconomyAPIProvider
+ * @main blugin\api\paymentpool\PaymentEconomyAPIProvider
  * @depend PaymentPool
  */
 
@@ -30,7 +30,7 @@ namespace blugin\api\paymentpool;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;
 
-class EconomyAPIProvider extends PluginBase{
+class PaymentEconomyAPIProvider extends PluginBase{
     public function onLoad(){
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{

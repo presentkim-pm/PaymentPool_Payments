@@ -18,10 +18,10 @@
  * @link    https://github.com/Blugin
  * @license https://www.gnu.org/licenses/lgpl-3.0 LGPL-3.0 License
  *
- * @name PaymentProvider-PointAPI
+ * @name PaymentPointAPIProvider
  * @api 3.0.0
  * @version 1.0.0
- * @main blugin\api\paymentpool\PointAPIProvider
+ * @main blugin\api\paymentpool\PaymentPointAPIProvider
  * @depend PaymentPool
  */
 
@@ -31,7 +31,7 @@ use Leader\PointAPI;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 
-class PointAPIProvider extends PluginBase{
+class PaymentPointAPIProvider extends PluginBase{
     public function onLoad(){
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{
