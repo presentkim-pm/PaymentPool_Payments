@@ -1,7 +1,7 @@
 {
-  "z\\CashAPI": "CashAPI",
-  "ojy\\coin\\Coin": "CashAPI",
-  "onebone\\economyapi\\EconomyAPI" : "EconomyAPI",
+  "z\\CashAPI": "CashAPIProvider",
+  "ojy\\coin\\Coin": "CoinProvider",
+  "onebone\\economyapi\\EconomyAPI" : "EconomyAPIProvider",
   "Leader\\PointAPI" : "PointAPIProvider",
-  "SCash\\SCash" : "Scash"
+  "SCash\\SCash" : "ScashProvider"
 }
