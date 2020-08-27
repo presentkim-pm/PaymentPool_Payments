@@ -3,5 +3,5 @@
   "ojy\\coin\\Coin": "CoinProvider",
   "onebone\\economyapi\\EconomyAPI" : "EconomyAPIProvider",
   "Leader\\PointAPI" : "PointAPIProvider",
-  "SCash\\SCash" : "ScashProvider"
+  "SCash\\SCash" : "SCashProvider"
 }
