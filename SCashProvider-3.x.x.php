@@ -18,10 +18,10 @@
  * @link    https://github.com/Blugin
  * @license https://www.gnu.org/licenses/lgpl-3.0 LGPL-3.0 License
  *
- * @name PaymentProvider-SCash
+ * @name PaymentSCashProvider
  * @api 3.0.0
  * @version 1.0.0
- * @main blugin\api\paymentpool\SCashProvider
+ * @main blugin\api\paymentpool\PaymentSCashProvider
  * @depend PaymentPool
  */
 
@@ -31,7 +31,7 @@ use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 use SCash\SCash;
 
-class SCashProvider extends PluginBase{
+class PaymentSCashProvider extends PluginBase{
     public function onLoad(){
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{

@@ -18,10 +18,10 @@
  * @link    https://github.com/Blugin
  * @license https://www.gnu.org/licenses/lgpl-3.0 LGPL-3.0 License
  *
- * @name PaymentProvider-Coin
+ * @name PaymentCoinProvider
  * @api 3.0.0
  * @version 1.0.0
- * @main blugin\api\paymentpool\CoinProvider
+ * @main blugin\api\paymentpool\PaymentCoinProvider
  * @depend PaymentPool
  */
 
@@ -31,7 +31,7 @@ use ojy\coin\Coin;
 use pocketmine\Player;
 use pocketmine\plugin\PluginBase;
 
-class CoinProvider extends PluginBase{
+class PaymentCoinProvider extends PluginBase{
     public function onLoad(){
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{
