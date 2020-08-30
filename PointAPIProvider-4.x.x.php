@@ -31,11 +31,19 @@ use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 
 class PaymentPointAPIProvider extends PluginBase{
+    private $falied = false;
+
     public function onLoad(){
-        if(!class_exists(PaymentPool::class))
-            throw new \RuntimeException("Could not load provider of 'PointAPI': PaymentPool missing");
-        if(!class_exists(PointAPI::class))
-            throw new \RuntimeException("Could not load provider of 'PointAPI': Target payment class missing");
+        try{
+            if(!class_exists(PaymentPool::class))
+                throw new \RuntimeException("Could not load provider of 'PointAPI': PaymentPool missing");
+            if(!class_exists(PointAPI::class))
+                throw new \RuntimeException("Could not load provider of 'PointAPI': Target payment class missing");
+        }catch(\RuntimeException $exception){
+            $this->getServer()->getLogger()->error($exception->getMessage());
+            $this->falied = true;
+            return;
+        }
 
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{
@@ -117,5 +125,10 @@ class PaymentPointAPIProvider extends PluginBase{
                 return $this->get($player);
             }
         }, ["leader:pointapi", "point"]);
+    }
+
+    public function onEnable(){
+        if($this->falied)
+            $this->setEnabled(false);
     }
 }

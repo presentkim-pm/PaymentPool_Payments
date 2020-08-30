@@ -31,11 +31,19 @@ use pocketmine\plugin\PluginBase;
 use SCash\SCash;
 
 class PaymentSCashProvider extends PluginBase{
+    private $falied = false;
+
     public function onLoad(){
-        if(!class_exists(PaymentPool::class))
-            throw new \RuntimeException("Could not load provider of 'SCash': PaymentPool missing");
-        if(!class_exists(SCash::class))
-            throw new \RuntimeException("Could not load provider of 'SCash': Target payment class missing");
+        try{
+            if(!class_exists(PaymentPool::class))
+                throw new \RuntimeException("Could not load provider of 'SCash': PaymentPool missing");
+            if(!class_exists(SCash::class))
+                throw new \RuntimeException("Could not load provider of 'SCash': Target payment class missing");
+        }catch(\RuntimeException $exception){
+            $this->getServer()->getLogger()->error($exception->getMessage());
+            $this->falied = true;
+            return;
+        }
 
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{
@@ -96,5 +104,10 @@ class PaymentSCashProvider extends PluginBase{
                 return $this->get($player);
             }
         }, ["xxx:scach"]);
+    }
+
+    public function onEnable(){
+        if($this->falied)
+            $this->setEnabled(false);
     }
 }
