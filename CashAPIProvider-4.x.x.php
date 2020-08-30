@@ -31,9 +31,19 @@ use pocketmine\plugin\PluginBase;
 use z\CashAPI;
 
 class PaymentCashAPIProvider extends PluginBase{
+    private $falied = false;
+
     public function onLoad(){
-        if(!class_exists(PaymentPool::class))
-            throw new \RuntimeException("Could not load provider of 'CashAPI': PaymentPool missing");
+        try{
+            if(!class_exists(PaymentPool::class))
+                throw new \RuntimeException("Could not load provider of 'CashAPI': PaymentPool missing");
+            if(!class_exists(CashAPI::class))
+                throw new \RuntimeException("Could not load provider of 'CashAPI': Target payment class missing");
+        }catch(\RuntimeException $exception){
+            $this->getServer()->getLogger()->error($exception->getMessage());
+            $this->falied = true;
+            return;
+        }
 
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             /** @var \ReflectionProperty */
@@ -119,5 +129,10 @@ class PaymentCashAPIProvider extends PluginBase{
                 return $this->get($player);
             }
         }, ["zaoui267:cashapi", "zcash"]);
+    }
+
+    public function onEnable(){
+        if($this->falied)
+            $this->setEnabled(false);
     }
 }

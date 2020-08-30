@@ -30,9 +30,19 @@ use onebone\economyapi\EconomyAPI;
 use pocketmine\plugin\PluginBase;
 
 class PaymentEconomyAPIProvider extends PluginBase{
+    private $falied = false;
+
     public function onLoad(){
-        if(!class_exists(PaymentPool::class))
-            throw new \RuntimeException("Could not load provider of 'EconomyAPI': PaymentPool missing");
+        try{
+            if(!class_exists(PaymentPool::class))
+                throw new \RuntimeException("Could not load provider of 'EconomyAPI': PaymentPool missing");
+            if(!class_exists(EconomyAPI::class))
+                throw new \RuntimeException("Could not load provider of 'EconomyAPI': Target payment class missing");
+        }catch(\RuntimeException $exception){
+            $this->getServer()->getLogger()->error($exception->getMessage());
+            $this->falied = true;
+            return;
+        }
 
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{
@@ -77,5 +87,10 @@ class PaymentEconomyAPIProvider extends PluginBase{
                 return $this->get($player);
             }
         }, ["onebone:economyapi", "economys"]);
+    }
+
+    public function onEnable(){
+        if($this->falied)
+            $this->setEnabled(false);
     }
 }

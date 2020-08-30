@@ -31,9 +31,19 @@ use pocketmine\player\Player;
 use pocketmine\plugin\PluginBase;
 
 class PaymentCoinProvider extends PluginBase{
+    private $falied = false;
+
     public function onLoad(){
-        if(!class_exists(PaymentPool::class))
-            throw new \RuntimeException("Could not load provider of 'Coin': PaymentPool missing");
+        try{
+            if(!class_exists(PaymentPool::class))
+                throw new \RuntimeException("Could not load provider of 'Coin': PaymentPool missing");
+            if(!class_exists(Coin::class))
+                throw new \RuntimeException("Could not load provider of 'Coin': Target payment class missing");
+        }catch(\RuntimeException $exception){
+            $this->getServer()->getLogger()->error($exception->getMessage());
+            $this->falied = true;
+            return;
+        }
 
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{
@@ -96,5 +106,10 @@ class PaymentCoinProvider extends PluginBase{
                 return $this->get($player);
             }
         }, ["ojy:coin"]);
+    }
+
+    public function onEnable(){
+        if($this->falied)
+            $this->setEnabled(false);
     }
 }
