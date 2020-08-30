@@ -34,6 +34,8 @@ class PaymentSCashProvider extends PluginBase{
     public function onLoad(){
         if(!class_exists(PaymentPool::class))
             throw new \RuntimeException("Could not load provider of 'SCash': PaymentPool missing");
+        if(!class_exists(SCash::class))
+            throw new \RuntimeException("Could not load provider of 'SCash': Target payment class missing");
 
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{

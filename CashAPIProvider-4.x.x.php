@@ -34,6 +34,8 @@ class PaymentCashAPIProvider extends PluginBase{
     public function onLoad(){
         if(!class_exists(PaymentPool::class))
             throw new \RuntimeException("Could not load provider of 'CashAPI': PaymentPool missing");
+        if(!class_exists(CashAPI::class))
+            throw new \RuntimeException("Could not load provider of 'CashAPI': Target payment class missing");
 
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             /** @var \ReflectionProperty */
