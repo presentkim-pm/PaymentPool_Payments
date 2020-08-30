@@ -22,7 +22,6 @@
  * @api 3.0.0
  * @version 1.0.0
  * @main blugin\api\paymentpool\PaymentCashAPIProvider
- * @depend PaymentPool
  */
 
 namespace blugin\api\paymentpool;
@@ -33,6 +32,9 @@ use z\CashAPI;
 
 class PaymentCashAPIProvider extends PluginBase{
     public function onLoad(){
+        if(!class_exists(PaymentPool::class))
+            throw new \RuntimeException("Could not load provider of 'CashAPI': PaymentPool missing");
+
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             /** @var \ReflectionProperty */
             private $dbReflention = null;

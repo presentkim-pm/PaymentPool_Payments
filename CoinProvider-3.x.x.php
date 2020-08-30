@@ -22,7 +22,6 @@
  * @api 3.0.0
  * @version 1.0.0
  * @main blugin\api\paymentpool\PaymentCoinProvider
- * @depend PaymentPool
  */
 
 namespace blugin\api\paymentpool;
@@ -33,6 +32,9 @@ use pocketmine\plugin\PluginBase;
 
 class PaymentCoinProvider extends PluginBase{
     public function onLoad(){
+        if(!class_exists(PaymentPool::class))
+            throw new \RuntimeException("Could not load provider of 'Coin': PaymentPool missing");
+
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{
                 return "coin";

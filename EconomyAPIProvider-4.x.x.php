@@ -22,7 +22,6 @@
  * @api 4.0.0
  * @version 1.0.0
  * @main blugin\api\paymentpool\PaymentEconomyAPIProvider
- * @depend PaymentPool
  */
 
 namespace blugin\api\paymentpool;
@@ -32,6 +31,9 @@ use pocketmine\plugin\PluginBase;
 
 class PaymentEconomyAPIProvider extends PluginBase{
     public function onLoad(){
+        if(!class_exists(PaymentPool::class))
+            throw new \RuntimeException("Could not load provider of 'EconomyAPI': PaymentPool missing");
+
         PaymentPool::getInstance()->registerProvider(new class() implements IPaymentProvider{
             public function getName() : string{
                 return "economyapi";
