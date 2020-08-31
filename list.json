@@ -4,5 +4,6 @@
   "onebone\\economyapi\\EconomyAPI" : "EconomyAPIProvider",
   "Leader\\PointAPI" : "PointAPIProvider",
   "SCash\\SCash" : "SCashProvider",
-  "Taco\\TacoEco\\Loader" : "TacoEcoProvider"
+  "Taco\\TacoEco\\Loader" : "TacoEcoProvider",
+  "twisted\\multieconomy\\MultiEconomy" : "MultiEconomyProvider"
 }
