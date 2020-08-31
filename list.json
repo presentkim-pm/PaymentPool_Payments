@@ -3,5 +3,7 @@
   "ojy\\coin\\Coin": "CoinProvider",
   "onebone\\economyapi\\EconomyAPI" : "EconomyAPIProvider",
   "Leader\\PointAPI" : "PointAPIProvider",
-  "SCash\\SCash" : "SCashProvider"
+  "SCash\\SCash" : "SCashProvider",
+  "Taco\\TacoEco\\Loader" : "TacoEcoProvider",
+  "twisted\\multieconomy\\MultiEconomy" : "MultiEconomyProvider"
 }
